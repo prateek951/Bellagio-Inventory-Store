@@ -13,15 +13,15 @@ class StorePicker extends Component {
   bindEvents() {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  
   handleSubmit(e) {
     e.preventDefault();
     //Get the name of the store from the input field
     const { value: storeName } = this.storeName.value;
     //   console.log(storeName);
-    // Redirect to the /store/whatever-the-user-wrote
+    // Change the page to the /store/whatever-the-user-wrote
     this.props.history.push(`/store/${storeName}`);
   }
-
   render() {
     return (
       <Fragment>
