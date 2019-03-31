@@ -5,10 +5,15 @@ class Order extends React.Component {
   renderOrder = key => {
     const food = this.props.foods[key];
     const count = this.props.order[key];
-    const isAvailable = food.status === "available";
+    const isAvailable = food && food.status === "available";
+    if (!food) {
+      return null;
+    }
     if (!isAvailable) {
       return (
-        <li key={key}>Sorry {food ? food.name : "food item"} is no longer available</li>
+        <li key={key}>
+          Sorry {food ? food.name : "food item"} is no longer available
+        </li>
       );
     } else {
       return (

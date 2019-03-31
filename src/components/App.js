@@ -4,6 +4,7 @@ import Order from "./Order";
 import Inventory from "./Inventory";
 import Food from "./Food";
 import sampleFoods from "./sample-foods";
+import base from "../fb/fbApp";
 
 class App extends React.Component {
   constructor(props) {
@@ -13,6 +14,33 @@ class App extends React.Component {
       order: {}
     };
     this.bindEvents();
+  }
+
+  componentDidMount() {
+    const { params } = this.props.match;
+    const localStorageRef = localStorage.getItem(params.id);
+    console.log(localStorageRef);
+    if(localStorageRef) { 
+      this.setState({ order: JSON.parse(localStorageRef) });
+    }
+    this.ref = base.syncState(params.id + "/foods", {
+      context: this,
+      state: "foods"
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("updated...");
+    //add the item to the localStorage
+    localStorage.setItem(
+      this.props.match.params.id,
+      JSON.stringify(this.state.order)
+    );
+  }
+
+  componentWillUnmount() {
+    // console.log("Unmounting the component");
+    base.removeBinding(this.ref);
   }
   bindEvents() {
     this.addFood = this.addFood.bind(this);
@@ -39,27 +67,33 @@ class App extends React.Component {
     console.log(`Here is the order`);
     console.log(key);
     console.log(`wiring of food and app done`);
-    const order = {...this.state.order};
+    const order = { ...this.state.order };
     order[key] = order[key] + 1 || 1;
     this.setState({ order: order });
   }
 
-
   render() {
     // console.log(this.props.match.params.id);
     const { foods, order } = this.state;
-    return <div className="catch-of-the-day">
+    return (
+      <div className="catch-of-the-day">
         <div className="menu">
           <Header restro="Bellagio" tagline="Ashok Vihar, New Delhi" />
           <ul className="fishes">
             {Object.keys(foods).map(key => (
-              <Food key={key} index={key} doOrder={this.doOrder} food={foods[key]} />
+              <Food
+                key={key}
+                index={key}
+                doOrder={this.doOrder}
+                food={foods[key]}
+              />
             ))}
           </ul>
         </div>
         <Order foods={foods} order={order} />
         <Inventory loadSamples={this.loadSamples} addFood={this.addFood} />
-      </div>;
+      </div>
+    );
   }
 }
 export default App;
