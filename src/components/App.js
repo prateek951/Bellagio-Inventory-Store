@@ -44,6 +44,9 @@ class App extends React.Component {
   }
   bindEvents() {
     this.addFood = this.addFood.bind(this);
+    this.deleteFood = this.deleteFood.bind(this);
+    this.updateFood = this.updateFood.bind(this);
+    this.removeFromOrder = this.removeFromOrder.bind(this);
     this.loadSamples = this.loadSamples.bind(this);
     this.doOrder = this.doOrder.bind(this);
   }
@@ -71,18 +74,24 @@ class App extends React.Component {
     order[key] = order[key] + 1 || 1;
     this.setState({ order: order });
   }
-
-  deleteFood = (key) =>  {
+  // Utility method to remove order
+  removeFromOrder(key) {
+    const order = { ...this.state.order };
+    delete order[key];
+    this.setState({ order: order });
+  }
+  // Utility method to delete the food
+  deleteFood(key) {
     const foods = Object.assign({}, this.state.foods);
     foods[key] = null;
     this.setState({ foods: foods });
   }
-
-  updateFood = (key, food) => {
+  // Utility method to update the food item
+  updateFood(key, food) {
     const foods = Object.assign({}, this.state.foods);
     foods[key] = food;
     this.setState({ foods: foods });
-  };
+  }
 
   render() {
     // console.log(this.props.match.params.id);
@@ -102,9 +111,9 @@ class App extends React.Component {
             ))}
           </ul>
         </div>
-        <Order foods={foods} order={order} />
+        <Order foods={foods} order={order} removeFromOrder={this.removeFromOrder} />
         <Inventory
-        deleteFood={this.deleteFood}
+          deleteFood={this.deleteFood}
           updateFood={this.updateFood}
           foods={this.state.foods}
           loadSamples={this.loadSamples}

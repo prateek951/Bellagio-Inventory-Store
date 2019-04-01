@@ -1,7 +1,6 @@
 import React, { Fragment, Component } from "react";
 import AddFoodForm from "./AddFoodForm";
 import EditFoodForm from "./EditFoodForm";
-import { throws } from "assert";
 
 class Inventory extends Component {
   render() {
