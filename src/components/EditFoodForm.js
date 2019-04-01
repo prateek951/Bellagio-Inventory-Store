@@ -14,6 +14,10 @@ class EditFoodForm extends React.Component {
     this.props.updateFood(index, updatedFood);
   };
 
+  deleteFood = () => {
+    this.props.deleteFood(this.props.index);
+  };
+
   render() {
     return (
       <div className="fish-edit">
@@ -44,6 +48,7 @@ class EditFoodForm extends React.Component {
           value={this.props.food.desc}
         />
         <input type="text" onChange={this.handleStringChange} name="image" />
+        <button onClick={this.deleteFood}>Delete Item</button>
       </div>
     );
   }

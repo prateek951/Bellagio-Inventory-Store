@@ -72,12 +72,16 @@ class App extends React.Component {
     this.setState({ order: order });
   }
 
-  updateFood = (key,food) => {
-    const foods = Object.assign({},this.state.foods);
+  deleteFood = (key) =>  {
+    const foods = Object.assign({}, this.state.foods);
+    foods[key] = null;
+    this.setState({ foods: foods });
+  }
+
+  updateFood = (key, food) => {
+    const foods = Object.assign({}, this.state.foods);
     foods[key] = food;
     this.setState({ foods: foods });
-  
-  
   };
 
   render() {
@@ -100,6 +104,7 @@ class App extends React.Component {
         </div>
         <Order foods={foods} order={order} />
         <Inventory
+        deleteFood={this.deleteFood}
           updateFood={this.updateFood}
           foods={this.state.foods}
           loadSamples={this.loadSamples}

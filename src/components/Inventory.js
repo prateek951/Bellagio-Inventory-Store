@@ -13,6 +13,7 @@ class Inventory extends Component {
             key =>
               console.log(key) || (
                 <EditFoodForm
+                  deleteFood={this.props.deleteFood}
                   updateFood={this.props.updateFood}
                   foods={this.props.foods}
                   key={key}
