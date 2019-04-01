@@ -72,6 +72,14 @@ class App extends React.Component {
     this.setState({ order: order });
   }
 
+  updateFood = (key,food) => {
+    const foods = Object.assign({},this.state.foods);
+    foods[key] = food;
+    this.setState({ foods: foods });
+  
+  
+  };
+
   render() {
     // console.log(this.props.match.params.id);
     const { foods, order } = this.state;
@@ -92,6 +100,7 @@ class App extends React.Component {
         </div>
         <Order foods={foods} order={order} />
         <Inventory
+          updateFood={this.updateFood}
           foods={this.state.foods}
           loadSamples={this.loadSamples}
           addFood={this.addFood}

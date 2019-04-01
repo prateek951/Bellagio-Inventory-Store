@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from "react";
 import AddFoodForm from "./AddFoodForm";
 import EditFoodForm from "./EditFoodForm";
+import { throws } from "assert";
 
 class Inventory extends Component {
   render() {
@@ -10,7 +11,15 @@ class Inventory extends Component {
           <h2>Inventory</h2>
           {Object.keys(this.props.foods).map(
             key =>
-              console.log(key) || <EditFoodForm food={this.props.foods[key]} />
+              console.log(key) || (
+                <EditFoodForm
+                  updateFood={this.props.updateFood}
+                  foods={this.props.foods}
+                  key={key}
+                  index={key}
+                  food={this.props.foods[key]}
+                />
+              )
           )}
           <AddFoodForm addFood={this.props.addFood} />
           <button onClick={this.props.loadSamples}>
