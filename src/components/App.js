@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Header from "./Header";
 import Order from "./Order";
 import Inventory from "./Inventory";
@@ -15,6 +16,9 @@ class App extends React.Component {
     };
     this.bindEvents();
   }
+  static propTypes = {
+    match: PropTypes.object
+  };
 
   componentDidMount() {
     const { params } = this.props.match;
@@ -111,7 +115,11 @@ class App extends React.Component {
             ))}
           </ul>
         </div>
-        <Order foods={foods} order={order} removeFromOrder={this.removeFromOrder} />
+        <Order
+          foods={foods}
+          order={order}
+          removeFromOrder={this.removeFromOrder}
+        />
         <Inventory
           deleteFood={this.deleteFood}
           updateFood={this.updateFood}

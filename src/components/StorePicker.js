@@ -1,7 +1,13 @@
 import React, { Fragment, Component } from "react";
+import PropTypes from "prop-types";
+
 import { getFunName } from "../helpers";
 
 class StorePicker extends Component {
+  static propTypes = {
+    history: PropTypes.object
+  };
+
   //  Create an input ref
   storeName = React.createRef();
 
@@ -13,7 +19,7 @@ class StorePicker extends Component {
   bindEvents() {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
+
   handleSubmit(e) {
     e.preventDefault();
     //Get the name of the store from the input field

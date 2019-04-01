@@ -1,6 +1,20 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class EditFoodForm extends React.Component {
+  static propTypes = {
+    food: PropTypes.shape({
+      name: PropTypes.string,
+      price: PropTypes.number,
+      status: PropTypes.string,
+      desc: PropTypes.string,
+      image: PropTypes.string
+    }),
+    index: PropTypes.string,
+    updateFood: PropTypes.func,
+    deleteFood: PropTypes.func
+  };
+
   handleStringChange = event => {
     console.log("inside the handleStringChange");
     console.log(this.props.food);

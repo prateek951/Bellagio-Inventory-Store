@@ -1,8 +1,17 @@
 import React, { Fragment, Component } from "react";
+import PropTypes from "prop-types";
+
 import AddFoodForm from "./AddFoodForm";
 import EditFoodForm from "./EditFoodForm";
 
 class Inventory extends Component {
+  static defaultProps = {
+    foods: PropTypes.object,
+    loadSamples: PropTypes.func,
+    updateFood: PropTypes.func,
+    deleteFood: PropTypes.func
+  };
+
   render() {
     return (
       <Fragment>

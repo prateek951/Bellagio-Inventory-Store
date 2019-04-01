@@ -1,4 +1,6 @@
 import React, { Fragment, Component } from "react";
+import PropTypes from 'prop-types'
+
 class AddFoodForm extends Component {
   //Create the ref
   nameRef = React.createRef();
@@ -12,6 +14,11 @@ class AddFoodForm extends Component {
     this.state = {};
     this.createFood = this.createFood.bind(this);
   }
+
+  static propTypes = {
+    addFood: PropTypes.func
+  };
+
   createFood(e) {
     // 1.Prevent the form from submission
     e.preventDefault();
