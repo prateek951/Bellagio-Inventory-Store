@@ -103,7 +103,7 @@ class App extends React.Component {
     return (
       <div className="catch-of-the-day">
         <div className="menu">
-          <Header restro="Bellagio" tagline="Ashok Vihar, New Delhi" />
+          <Header restro={this.props.match.params.id} tagline="Ashok Vihar, New Delhi" />
           <ul className="fishes">
             {Object.keys(foods).map(key => (
               <Food
